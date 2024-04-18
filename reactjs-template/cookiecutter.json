@@ -1,0 +1,9 @@
+{
+    "project_slug": "sample",
+    "_copy_without_render": [
+        "infra/template"
+    ],
+    "docker_repository": "bansodesatish/reactapp",
+    "docker_tag": "latest",
+    "domain_name": "chart-example.local"
+}

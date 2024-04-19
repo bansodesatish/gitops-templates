@@ -5,10 +5,10 @@
 replicaCount: 1
 
 image:
-  repository: {{docker_repository}}
+  repository: {{ cookiecutter.docker_repository }}
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: {{docker_tag}}
+  tag: {{ cookiecutter.docker_tag }}
 
 imagePullSecrets: []
 nameOverride: ""
@@ -47,7 +47,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: {{domain_name}}
+    - host: {{ cookiecutter.domain_name }}
       paths:
         - path: /
           pathType: ImplementationSpecific

@@ -10,8 +10,8 @@ spec:
   project: default
   source:
     path: namespaces/
-    repoURL: {{eks_teamplate_repo_URL}}
-    targetRevision: {{eks_teamplate_repo_targetRevision}}
+    repoURL: {{ cookiecutter.eks_teamplate_repo_URL }}
+    targetRevision: {{ cookiecutter.eks_teamplate_repo_targetRevision }}
   syncPolicy:
     automated:
       selfHeal: true

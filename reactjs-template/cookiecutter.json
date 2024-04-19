@@ -1,7 +1,8 @@
 {
     "project_name": "sample",
     "_copy_without_render": [
-        "infra/templates"
+        "infra/templates",
+        ".github/workflows"
     ],
     "docker_repository": "bansodesatish/reactapp",
     "docker_tag": "latest",

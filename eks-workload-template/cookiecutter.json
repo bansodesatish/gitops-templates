@@ -1,4 +1,5 @@
 {
+    "project_name": "eks-workload-template",
     "eks_teamplate_repo_URL": "changeme",
     "eks_teamplate_repo_targetRevision": "main",
     "argocd_projects_dir_name": "argocd-appprojects",

@@ -1,7 +1,7 @@
 {
     "project_name": "sample",
     "_copy_without_render": [
-        "infra/template"
+        "infra/templates"
     ],
     "docker_repository": "bansodesatish/reactapp",
     "docker_tag": "latest",

@@ -1,5 +1,5 @@
 {
-    "project_slug": "sample",
+    "project_name": "sample",
     "_copy_without_render": [
         "infra/template"
     ],

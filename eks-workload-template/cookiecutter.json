@@ -3,5 +3,7 @@
     "eks_teamplate_repo_targetRevision": "main",
     "argocd_projects_dir_name": "argocd-appprojects",
     "argocd_apps_dir_name": "argocd-apps",
-    "argocd_namespaces_dir_name": "namespaces"
+    "argocd_namespaces_dir_name": "namespaces",
+    "argocd_project_destination": "https://kubernetes.default.svc",
+    "argocd_namespace_name": "argocd"
 }

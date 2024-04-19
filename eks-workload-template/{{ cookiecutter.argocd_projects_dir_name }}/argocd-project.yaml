@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: argocd
+  namespace: argocd
+spec:
+  description: Argocd Project
+  sourceRepos:
+    - '*'
+  destinations:
+    - namespace: argocd
+      server: {{ cookiecutter.argocd_project_destination }}
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  orphanedResources:
+    warn: false

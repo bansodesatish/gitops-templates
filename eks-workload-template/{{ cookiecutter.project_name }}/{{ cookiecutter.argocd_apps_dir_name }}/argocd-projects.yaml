@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: argocd-appprojets/
+    path: argocd-appprojects/
     repoURL: {{ cookiecutter.eks_teamplate_repo_URL }}
     targetRevision: {{ cookiecutter.eks_teamplate_repo_targetRevision }}
   syncPolicy:

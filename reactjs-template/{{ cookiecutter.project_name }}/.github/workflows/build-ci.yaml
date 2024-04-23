@@ -38,5 +38,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: bansodesatish/reactapp:${{ "{{" }} github.run_id {{ "}}" }}"
-          file: Dockerfile-nginx
+          tags: {{ cookiecutter.docker_repository }}:{{ cookiecutter.docker_tag }}
+          file: {{ cookiecutter.Dockerfile_Path }}

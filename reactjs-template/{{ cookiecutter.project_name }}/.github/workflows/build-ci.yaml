@@ -40,7 +40,7 @@ jobs:
           context: .
           push: true
           # tags: {{ cookiecutter.docker_repository }}:{{ cookiecutter.docker_tag }}
-          tags: ${{ "{{" }} env.docker_repository {{ "}}" }}":${{ "{{" github.run_id "}}" }}
+          tags: ${{ "{{" }} env.docker_repository {{ "}}" }}:${{ "{{" github.run_id "}}" }}
           file: {{ cookiecutter.Dockerfile_Path }}
       - 
         name: update Helm chart values file

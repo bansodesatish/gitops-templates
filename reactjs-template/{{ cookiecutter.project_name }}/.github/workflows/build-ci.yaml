@@ -12,7 +12,8 @@ on:
     - 'Dockerfile-nginx'
     - 'nginx.conf'
 
-
+env: 
+  docker_repository: {{ cookiecutter.docker_repository }}
 jobs:
   docker:
     runs-on: ubuntu-latest
@@ -38,5 +39,26 @@ jobs:
         with:
           context: .
           push: true
-          tags: {{ cookiecutter.docker_repository }}:{{ cookiecutter.docker_tag }}
+          # tags: {{ cookiecutter.docker_repository }}:{{ cookiecutter.docker_tag }}
+          tags: ${{ "{{" }} env.docker_repository {{ "}}" }}":${{ "{{" github.run_id "}}" }}
           file: {{ cookiecutter.Dockerfile_Path }}
+      - 
+        name: update Helm chart values file
+        run: |
+          sudo add-apt-repository ppa:rmescandon/yq
+          sudo apt update -y
+          sudo apt install yq -y
+          cd infra
+          sed -i "s,tag: .*,tag: ${{ "{{" github.run_id "}}" }},g" ./values.yaml
+
+      -
+        name: Push changes 
+        run: |
+          git config user.name github-actions 
+          git config user.mail github-actions@github.com 
+          git add -A
+          if ! git diff-index --quiet HEAD; then 
+            git pull 
+            git commit -m "Update Helm values file image tag to '${{ "{{" }} github.run_id {{ "}}'"
+            git push 
+          fi 

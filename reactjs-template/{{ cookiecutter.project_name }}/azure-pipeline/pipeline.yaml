@@ -1,15 +1,35 @@
 trigger:
 - main
+variables:
+  # - group: getport
+  # - group: terraform-backend
 
-pool:
-  vmImage: 'ubuntu-latest'
+  - name: imageRepository
+    value: 
+  - name: dockerfilePath
+    value: ./Dockerfile-nginx
+  - name: buildContext
+    value: '**'
 
-steps:
-- task: UseNode@1
-  inputs:
-    version: '16.x'
-  displayName: 'Install Node.js'
-
-- script: |
-    echo "Build Number: $(Build.BuildNumber)"
-  displayName: 'Build number {{ cookiecutter.project_name }}'
+parameters:
+- name: dockerRegistryServiceConnection
+  displayName: dockerRegistryServiceConnection
+  type: string
+  default: dockerhub-bansodesatish
+stages:    
+  - stage: Build
+    displayName: Build and push stage
+    jobs:  
+    - job: Build
+      displayName: Build job
+      steps:
+      - task: Docker@2
+        displayName: Build and push an image to container registry
+        inputs:
+          command: buildAndPush # Allowed values: buildAndPush, build, push, login, logout, start, stop. Default value: buildAndPush
+          repository: ${{ "{{" }} variables.imageRepository {{ "}}" }}
+          dockerfile: ${{ "{{" }} variables.dockerfilePath {{ "}}" }}
+          buildContext: ${{ "{{" }} variables.buildContext {{ "}}" }}
+          containerRegistry: ${{ "{{" }} parameters.dockerRegistryServiceConnection {{ "}}" }}
+          tags: |
+            $(Build.BuildId)

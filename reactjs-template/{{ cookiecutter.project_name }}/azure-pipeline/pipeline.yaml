@@ -5,9 +5,9 @@ variables:
   # - group: terraform-backend
 
   - name: imageRepository
-    value: 
+    value: {{ cookiecutter.docker_repository }}/{{ cookiecutter.project_name }}
   - name: dockerfilePath
-    value: ./Dockerfile-nginx
+    value: {{ cookiecutter.Dockerfile_Path }}
   - name: buildContext
     value: '**'
 

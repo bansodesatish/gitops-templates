@@ -3,7 +3,7 @@
     "_copy_without_render": [
         "infra/templates"
     ],
-    "docker_repository": "bansodesatish/reactapp",
+    "docker_repository": "bansodesatish",
     "docker_tag": "latest",
     "domain_name": "chart-example.local",
     "Dockerfile_Path": "Dockerfile-nginx"

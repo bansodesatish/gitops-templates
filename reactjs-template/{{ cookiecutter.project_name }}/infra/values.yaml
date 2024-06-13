@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: {{ cookiecutter.docker_repository }}
+  repository: {{ cookiecutter.docker_repository }}/{{ cookiecutter.project_name }}
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: {{ cookiecutter.docker_tag }}

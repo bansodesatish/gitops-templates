@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ cookiecutter.project_name }}
+  namespace: {{ cookiecutter.argocd_application_namespace }}
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: {{ cookiecutter.app_namespace }}
+    server: {{ cookiecutter.destination_server }}
+  project: {{ cookiecutter.argocd_project_name }}
+  source:
+    path: {{ cookiecutter.source_path }}
+    repoURL: {{ cookiecutter.source_repo_url }}
+    targetRevision: {{ cookiecutter.source_targetRevision }}
+    chart: {{ cookiecutter.project_name }}
+    helm: 
+      releaseName: {{ cookiecutter.project_name }}
+      ignoreMissingValueFiles: true
+      valueFiles:
+        - $infra/values.yaml

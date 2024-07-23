@@ -36,7 +36,7 @@ stages:
             latest
       - script: |
           sudo apt-get update
-          sudo apt-get install -y jq yq
+          sudo apt-get install -y jq 
         displayName: Install jq
       - script: |            
           sed -i "s,tag: .*,tag: $(Build.BuildId),g" ./infra/values.yaml 

@@ -13,7 +13,7 @@ spec:
   source:
     path: {{ cookiecutter.source_path }}
     repoURL: {{ cookiecutter.source_repo_url }}
-    chart: {{ cookiecutter.project_name }}
+    targetRevision: {{ cookiecutter.source_targetRevision }}
     helm: 
       releaseName: {{ cookiecutter.project_name }}
       ignoreMissingValueFiles: true

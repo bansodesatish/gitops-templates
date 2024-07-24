@@ -5,6 +5,6 @@
     ],
     "docker_repository": "bansodesatish",
     "docker_tag": "latest",
-    "domain_name": "chart-example.local",
+    "domain_name": "changeme.demo101.xy",
     "Dockerfile_Path": "Dockerfile-nginx"
 }

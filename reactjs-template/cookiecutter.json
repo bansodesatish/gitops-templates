@@ -6,5 +6,5 @@
     "docker_repository": "bansodesatish",
     "docker_tag": "latest",
     "domain_name": "changeme.demo101.xy",
-    "Dockerfile_Path": "Dockerfile-nginx"
+    "Dockerfile_Path": "Dockerfile"
 }

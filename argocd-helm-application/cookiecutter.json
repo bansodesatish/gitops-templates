@@ -4,7 +4,6 @@
     "destination_server": "https://kubernetes.default.svc",
     "source_path": "infra",
     "source_repo_url": "change-me",
-    "source_targetRevision": "main",
     "argocd_application_namespace": "argocd",
     "argocd_project_name": "default"
 }

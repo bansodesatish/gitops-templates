@@ -14,3 +14,8 @@ spec:
     path: {{ cookiecutter.source_path }}
     repoURL: {{ cookiecutter.source_repo_url }}
     targetRevision: {{ cookiecutter.source_targetRevision }}
+  syncPolicy:
+    automated:
+      prune: true
+      allowEmpty: true
+      selfHeal: true

@@ -19,3 +19,5 @@ spec:
       ignoreMissingValueFiles: true
       valueFiles:
         - $infra/values.yaml
+  syncPolicy:
+    automated: {}

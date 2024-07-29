@@ -1,0 +1,71 @@
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - src/**
+    - Dockerfile
+    - Dockerfile-nginx
+variables:
+  - group: getport
+  - group: terraform-backend
+
+  - name: imageRepository
+    value: {{ cookiecutter.docker_repository }}/{{ cookiecutter.project_name }}
+  - name: dockerfilePath
+    value: {{ cookiecutter.Dockerfile_Path }}
+  - name: buildContext
+    value: '**'
+
+parameters:
+- name: dockerRegistryServiceConnection
+  displayName: dockerRegistryServiceConnection
+  type: string
+  default: dockerhub-bansodesatish
+stages:    
+  - stage: Build
+    displayName: Build and push stage
+    jobs:  
+    - job: Build
+      displayName: Build job
+      steps:
+      - task: Docker@2
+        displayName: Build and push an image to container registry
+        inputs:
+          command: buildAndPush # Allowed values: buildAndPush, build, push, login, logout, start, stop. Default value: buildAndPush
+          repository: ${{ "{{" }} variables.imageRepository {{ "}}" }}
+          dockerfile: ${{ "{{" }} variables.dockerfilePath {{ "}}" }}
+          buildContext: ${{ "{{" }} variables.buildContext {{ "}}" }}
+          containerRegistry: ${{ "{{" }} parameters.dockerRegistryServiceConnection {{ "}}" }}
+          tags: |
+            $(Build.BuildId)
+            latest
+      - script: |
+          sudo apt-get update
+          sudo apt-get install -y jq 
+        displayName: Install jq
+      - script: |            
+          sed -i "s,tag: .*,tag: $(Build.BuildId),g" ./infra/values.yaml 
+        displayName: Update values files
+            
+      - script: | 
+          git config user.name github-actions 
+          git config user.mail github-actions@github.com 
+          git config --global init.defaultBranch "master"
+          
+          MY_PAT=$(PERSONAL_ACCESS_TOKEN_PORTS)
+          B64_PAT=$(printf ":%s" "$MY_PAT" | base64)
+          echo $B64_PAT
+          set -x
+          
+          git remote rm origin &> /dev/null
+          git remote add origin https://$MY_PAT@dev.azure.com/YashTech-DevOps/YASH-DevOps-ContainerK8s/_git/$(Build.Repository.Name) &> /dev/null
+
+          git add -A
+          if ! git diff-index --quiet HEAD; then 
+            git pull 
+            git commit -m "Update Helm values file image tag to '$(Build.BuildId)'"
+            git push origin HEAD:master
+          fi 
+        displayName: push changes

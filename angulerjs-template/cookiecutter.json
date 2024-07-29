@@ -1,0 +1,10 @@
+{
+    "project_name": "sample",
+    "_copy_without_render": [
+        "infra/templates"
+    ],
+    "docker_repository": "bansodesatish",
+    "docker_tag": "latest",
+    "domain_name": "changeme.demo101.xy",
+    "Dockerfile_Path": "Dockerfile"
+}

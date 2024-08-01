@@ -27,5 +27,4 @@ usermod -aG docker vscode
 EOF
 # install Docker tools (cli, buildx, compose)
 COPY --from=gloursdocker/docker / /
-
-CMD ["ng", "serve", "--host", "0.0.0.0", "--disable-host-check", "true"]
+CMD ["ng", "serve",  "--public-host", "$PUBLIC_HOST", "--host", "0.0.0.0", "--disable-host-check", "true"]

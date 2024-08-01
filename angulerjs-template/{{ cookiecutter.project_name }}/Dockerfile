@@ -28,4 +28,4 @@ EOF
 # install Docker tools (cli, buildx, compose)
 COPY --from=gloursdocker/docker / /
 
-CMD ["ng", "serve", "--host", "0.0.0.0", "--disableHostCheck", "true"]
+CMD ["ng", "serve", "--host", "0.0.0.0", "--disable-host-check", "true"]

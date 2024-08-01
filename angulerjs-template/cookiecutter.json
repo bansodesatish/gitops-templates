@@ -2,7 +2,7 @@
     "project_name": "sample",
     "_copy_without_render": [
         "infra/templates",
-        "*.heml"
+        "*.html"
     ],
     "docker_repository": "bansodesatish",
     "docker_tag": "latest",

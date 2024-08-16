@@ -1,22 +1,21 @@
-FROM node:14-alpine as build
+# syntax=docker/dockerfile:1.4
 
+# 1. For build React app
+FROM node:lts AS development
+
+# Set working directory
 WORKDIR /app
 
-COPY package*.json ./
+# 
+COPY package.json /app/package.json
+COPY package-lock.json /app/package-lock.json
 
-RUN npm install
+# Same as npm install
+RUN npm ci
 
-COPY . .
+COPY . /app
 
-# React app for production
-RUN npm run build
+ENV CI=true
+ENV PORT=3000
 
-# Using Nginx for serving static files
-FROM nginx:alpine
-
-# Copying the built files from the previous stage
-COPY --from=build /app/build /usr/share/nginx/html
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD [ "npm", "start" ]

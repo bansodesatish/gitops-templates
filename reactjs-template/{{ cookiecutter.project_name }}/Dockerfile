@@ -1,21 +1,11 @@
-# syntax=docker/dockerfile:1.4
-
-# 1. For build React app
-FROM node:lts AS development
-
-# Set working directory
+FROM node:14 as build
 WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
 
-# 
-COPY package.json /app/package.json
-COPY package-lock.json /app/package-lock.json
-
-# Same as npm install
-RUN npm ci
-
-COPY . /app
-
-ENV CI=true
-ENV PORT=3000
-
-CMD [ "npm", "start" ]
+FROM nginx:alpine
+COPY --from=build /app/build /usr/share/nginx/html
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
